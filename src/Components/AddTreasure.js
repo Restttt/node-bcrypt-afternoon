@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 
 export default class AddTreasure extends Component {
   constructor() {
@@ -13,8 +14,13 @@ export default class AddTreasure extends Component {
   }
 
   addTreasure() {
-    // post to /api/treasure/user here
-  }
+    const image = {
+      img: this.state.treasureURL
+    }
+    Axios.post('/api/treasure/user', image).then(res => {
+      this.setState({ treasureUrl: '' })
+    }).catch(err => alert(err.response.request.response));
+  };
 
   render() {
     return (
